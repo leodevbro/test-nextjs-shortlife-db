@@ -36,6 +36,16 @@ export type DogAttribute = {
   value: Scalars['String'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  delDog: Dog;
+};
+
+
+export type MutationDelDogArgs = {
+  ind: Scalars['Float'];
+};
+
 export type Query = {
   __typename?: 'Query';
   dog?: Maybe<Dog>;
@@ -66,6 +76,13 @@ export type GetOneDogQueryVariables = Exact<{
 
 export type GetOneDogQuery = { __typename?: 'Query', dog?: { __typename?: 'Dog', name: string, breed: string } | null };
 
+export type DddMutationVariables = Exact<{
+  iii: Scalars['Float'];
+}>;
+
+
+export type DddMutation = { __typename?: 'Mutation', delDog: { __typename?: 'Dog', name: string } };
+
 
 export const GetDogsDocument = gql`
     query getDogs($dogLimit: Int!) {
@@ -83,6 +100,13 @@ export const GetOneDogDocument = gql`
   }
 }
     `;
+export const DddDocument = gql`
+    mutation ddd($iii: Float!) {
+  delDog(ind: $iii) {
+    name
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -96,6 +120,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getOneDog(variables: GetOneDogQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetOneDogQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetOneDogQuery>(GetOneDogDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getOneDog', 'query');
+    },
+    ddd(variables: DddMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<DddMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DddMutation>(DddDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ddd', 'mutation');
     }
   };
 }

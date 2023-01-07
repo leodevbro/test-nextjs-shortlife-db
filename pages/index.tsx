@@ -4,7 +4,7 @@ import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 
 import { dehydrate, useQuery } from "react-query";
-import { queryClient, getDogs, getOneDog } from "../src/gq001/api";
+import { queryClient, getDogs, getOneDog, ddd } from "../src/gq001/api";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,10 +44,21 @@ export default function Home(props: any) {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <p>
+          <div>
             Getttttt started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
-          </p>
+            <p
+              onClick={() => {
+                queryClient.executeMutation({
+                  mutationFn: ddd,
+                  variables: { iii: 0 },
+                });
+              }}
+              
+            >
+              Del One Dog
+            </p>
+          </div>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"

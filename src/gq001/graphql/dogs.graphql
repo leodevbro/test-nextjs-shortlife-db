@@ -12,3 +12,9 @@ query getOneDog($name: String!) {
     breed
   }
 }
+
+mutation ddd($iii: Float!) {
+  delDog(ind: $iii) {
+    name
+  }
+}
