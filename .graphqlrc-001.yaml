@@ -1,0 +1,12 @@
+overwrite: true,
+schema: ["http://localhost:3000/api/graphql"]
+documents: ["./src/gq001/**/*.{graphql,js,ts,jsx,tsx}"]
+generates: {
+    # "./src/gq001/gql/": { preset: "client", plugins: ["typescript-graphql-request"] },
+    "./src/gq001/generated-gql/graphql.ts":
+      {
+        plugins:
+          ["typescript", "typescript-operations", "typescript-graphql-request"],
+      },
+    # "./graphql.schema.json": { plugins: ["introspection"] },
+  }

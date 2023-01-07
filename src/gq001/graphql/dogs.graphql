@@ -1,0 +1,14 @@
+query getDogs($dogLimit: Int!) {
+  dogs (dogLimit: $dogLimit) {
+    name
+    availableDate
+  }
+}
+
+
+query getOneDog($name: String!) {
+  dog (name: $name) {
+    name
+    breed
+  }
+}

@@ -1,11 +1,39 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import styles from "../styles/Home.module.css";
 
-const inter = Inter({ subsets: ['latin'] })
+import { dehydrate, useQuery } from "react-query";
+import { queryClient, getDogs, getOneDog } from "../src/gq001/api";
 
-export default function Home() {
+const inter = Inter({ subsets: ["latin"] });
+
+export async function getServerSideProps() {
+  await queryClient.prefetchQuery("dogs", () => getDogs({ dogLimit: 4 }));
+  await queryClient.prefetchQuery("dog", () => getOneDog({ name: "Abby" }));
+
+  const ourDehydratedState = dehydrate(queryClient);
+  console.log("tlaaaa");
+  console.log(ourDehydratedState);
+
+  return {
+    props: {
+      // dehydratedState: ourDehydratedState,
+    },
+  };
+}
+
+export default function Home(props: any) {
+  const { data } = useQuery(["dogs"], () => getDogs({ dogLimit: 4 }));
+  const { data: data2 } = useQuery(["dog"], () => getOneDog({ name: "Abby" }));
+
+  console.log("dataaaaa");
+  console.log(data);
+  console.log("proooo");
+  console.log(props);
+  console.log("data2");
+  console.log(data2);
+
   return (
     <>
       <Head>
@@ -17,7 +45,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-            Get started by editing&nbsp;
+            Getttttt started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
           </p>
           <div>
@@ -26,7 +54,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{' '}
+              By{" "}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
@@ -119,5 +147,5 @@ export default function Home() {
         </div>
       </main>
     </>
-  )
+  );
 }

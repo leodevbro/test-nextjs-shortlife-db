@@ -13,23 +13,25 @@ import {
   ID,
 } from "type-graphql";
 import { GraphQLSchema } from "graphql";
+import { DogsResolver } from "../../src/gq001/schema/dogs.resolver";
+// import { DogsResolver } from "../../src/schema/dogs.resolver";
 
-@ObjectType()
-export class Dog {
-  @Field(() => ID)
-  name?: string;
-}
+// @ObjectType()
+// export class Dog {
+//   @Field(() => ID)
+//   name?: string;
+// }
 
-@Resolver(Dog)
-export class DogResolver {
-  @Query(() => [Dog])
-  dogs(): Dog[] {
-    return [{ name: "Bo" }, { name: "Lassie" }];
-  }
-}
+// @Resolver(Dog)
+// export class DogsResolver {
+//   @Query(() => [Dog])
+//   dogs(): Dog[] {
+//     return [{ name: "Bo" }, { name: "Lassie" }];
+//   }
+// }
 
 const schemaPromise = buildSchema({
-  resolvers: [DogResolver],
+  resolvers: [DogsResolver],
 });
 
 const resolvers = {

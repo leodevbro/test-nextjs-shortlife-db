@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen --config ./.graphqlrc-001.yaml"
   },
   "dependencies": {
     "@apollo/client": "^3.7.3",
@@ -19,12 +20,19 @@
     "class-validator": "^0.14.0",
     "eslint": "8.30.0",
     "eslint-config-next": "13.1.1",
-    "graphql": "^15.8.0",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.1.0",
     "next": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-query": "^3.39.2",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^1.1.1",
-    "typescript": "4.9.4"
+    "type-graphql": "^2.0.0-beta.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.16.2",
+    "@graphql-codegen/client-preset": "1.2.4",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.8",
+    "typescript": "^4.9.4"
   }
 }
