@@ -65,7 +65,7 @@ export default function Home(props: any) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{" "}
+              By{" - "}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
