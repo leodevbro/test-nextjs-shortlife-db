@@ -2,6 +2,7 @@ import "reflect-metadata"; // maybe here?????????????????????????????????????
 import { gql } from "@apollo/client";
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
+import { ApolloServerPluginLandingPageProductionDefault } from "@apollo/server/plugin/landingPage/default";
 
 import {
   buildSchema,
@@ -52,6 +53,12 @@ const getServer = async (schemaPromise: Promise<GraphQLSchema>) => {
     // typeDefs,
     // resolvers,
     introspection: true,
+    plugins: [
+      ApolloServerPluginLandingPageProductionDefault({
+        // graphRef: 'my-graph-id@my-graph-variant',
+        // footer: false,
+      }),
+    ],
   });
 
   return server;
